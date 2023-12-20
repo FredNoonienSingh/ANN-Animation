@@ -6,10 +6,16 @@ int WIDTH = 1024;
 int HEIGHT = 768;
 float LEARNING_RATE = 0.01; 
 boolean isRunning = true;
+boolean renderLable = true; 
 
-Integer[] LayerSizes = {2,4,8,16,8,4,2};
+Integer[] LayerSizes = {2,4,8,8,4,2};
 ArrayList<ArrayList> Network = new ArrayList<>(); 
 ArrayList<Input> Inputs = new ArrayList<>(); 
+Button b = new Button("Click to start annimation", WIDTH/2, HEIGHT/2, 150, 80); 
+
+void toogleRunning(){
+    isRunning = !isRunning; 
+}
 
 void setup(){
     size(1024, 768);
@@ -22,8 +28,9 @@ void setup(){
     for(int i = 0; i<Network.size(); i++){
         float NetworkWidth = WIDTH/(Network.size() +1); 
         for(int j = 0; j<LayerSizes[i]; j++){
-            float LayerHeight = HEIGHT/(LayerSizes[i]+1);
-            Node n = new Node(NetworkWidth*(i+1), LayerHeight*(j+1),LEARNING_RATE);
+            float nodeX = NetworkWidth*(i+1); 
+            float layerHeight = HEIGHT/(LayerSizes[i]+1);
+            Node n = new Node(nodeX, layerHeight*(j+1),LEARNING_RATE);
             if(i == Network.size()-1){
                 if(j%2 == 0){
                     n.r = 0; 
@@ -77,6 +84,6 @@ void draw(){
             }
         }
     }else{
-        text("Click on the program, then type to add to the String", 50, 50);
+        b.update();
     }
 }

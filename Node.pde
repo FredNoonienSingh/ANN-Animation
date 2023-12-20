@@ -17,7 +17,6 @@ class Node{
         b = 0; 
     }
 
-
     void addConnection(Node parent, Node child){
         Connection con = new Connection(parent, child);
         Connections.add(con);

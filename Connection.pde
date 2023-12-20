@@ -10,19 +10,23 @@ class Connection{
     }
 
     void update(){
-        float strokeW = map(strength, 0, 1, 0,1); 
-        float alphaValue = map(strength, 0,1, 155, 255);
+        float strokeW = map(strength, -0.5, 0.5, 0,1); 
+        float alphaValue = map(strength, -0.5,0.5, 155, 255);
         if(strength < .25){
             stroke(255, 255, 255, alphaValue);
         }else{
             stroke(0, 255, 255, alphaValue); 
         }
         try {
-            if(child.hoover || parent.hoover){
+            if( parent.hoover){
                 strokeWeight(strokeW+1);
-                stroke(255,0, 255);
+                stroke(155,0, 255);
                 line(parent.posx, parent.posy, child.posx, child.posy);
-                return; 
+            }
+            if(child.hoover){
+                strokeWeight(strokeW+1);
+                stroke(255,0, 155);
+                line(parent.posx, parent.posy, child.posx, child.posy);
             }   
             strokeWeight(strokeW);
             line(parent.posx, parent.posy, child.posx, child.posy); 
