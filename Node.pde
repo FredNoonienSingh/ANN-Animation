@@ -1,7 +1,10 @@
 class Node{
+
     float posx, posy,weight, learning_rate;
     float maxNodeWeight = 1;
-    float minNodeWeight = 0; 
+    float minNodeWeight = 0;
+    int radius = 12;
+    boolean hoover = false; 
     ArrayList<Connection> Connections = new ArrayList<>(); 
 
     Node(float x,float y, float lr){
@@ -16,10 +19,31 @@ class Node{
         Connections.add(con);
     }
 
+    void onHover(float mx, float my){
+        //System.out.println(String.format("%s, %s", mx, my)); 
+        float disX = posx - mx;
+        float disY = posy - my;
+        if(
+            (sqrt(sq(disX) + sq(disY)) < radius )
+        ){
+            hoover = true; 
+        }else{
+            hoover = false; 
+        }
+    }
+
     void update(){
-        float alphaValue = map(weight, minNodeWeight,maxNodeWeight, 155, 255);
-        noStroke();
+        onHover(mouseX, mouseY); 
+        float alphaValue = map(weight, minNodeWeight,maxNodeWeight, 200, 255);
+        if(!hoover){
+            noStroke();
+            radius = 12; 
+        }else{
+            radius = 17; 
+            stroke(255,255,255); 
+        }
+
         fill(0, 255, 0, alphaValue);
-        circle(posx, posy, 12);
+        circle(posx, posy, radius);
     }
 }

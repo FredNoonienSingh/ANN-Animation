@@ -11,12 +11,14 @@ class Button{
         height = h;
         hoover = false;  
     }
+
     void onHover(float mx, float my){
         if(mx <= posx && mx >= posx+width && my <= posy && my >= posy+height){
             hoover = true; 
         }
         hoover = false; 
     }
+
     void update(){
         rect(posx, posy, width, height); 
     }

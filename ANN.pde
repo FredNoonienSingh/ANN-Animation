@@ -7,7 +7,7 @@ int HEIGHT = 768;
 float LEARNING_RATE = 0.01; 
 boolean isRunning = true;
 
-Integer[] LayerSizes = {2,3,2};
+Integer[] LayerSizes = {2,4,8,4,2};
 ArrayList<ArrayList> Network = new ArrayList<>(); 
 ArrayList<Input> Inputs = new ArrayList<>(); 
 
