@@ -2,7 +2,6 @@ class Input{
     float posy;
     int secCount;  
     Node targetNode; 
-    //ArrayList<float> Values = new ArrayList<>(); 
     
     Input(Node t){
         targetNode = t;
@@ -11,6 +10,7 @@ class Input{
     }
     void update(){
         strokeWeight(8);
+        stroke(0, 255, 55); 
         line(0, posy, targetNode.posx, targetNode.posy);
         for(int i = 0; i>secCount; i++){
                 if(i%2 == 1){

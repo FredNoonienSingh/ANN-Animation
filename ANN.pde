@@ -7,13 +7,13 @@ int HEIGHT = 768;
 float LEARNING_RATE = 0.01; 
 boolean isRunning = true;
 
-Integer[] LayerSizes = {2,4,8,4,2};
+Integer[] LayerSizes = {2,4,8,16,8,4,2};
 ArrayList<ArrayList> Network = new ArrayList<>(); 
 ArrayList<Input> Inputs = new ArrayList<>(); 
 
 void setup(){
     size(1024, 768);
-    frameRate(24);
+    frameRate(60);
     for(int i=0; i<LayerSizes.length; i++){
         ArrayList<Node> Layer = new ArrayList<>();
         Network.add(Layer);
@@ -24,6 +24,17 @@ void setup(){
         for(int j = 0; j<LayerSizes[i]; j++){
             float LayerHeight = HEIGHT/(LayerSizes[i]+1);
             Node n = new Node(NetworkWidth*(i+1), LayerHeight*(j+1),LEARNING_RATE);
+            if(i == Network.size()-1){
+                if(j%2 == 0){
+                    n.r = 0; 
+                    n.g = 255; 
+                    n.b = 255;
+                }else{
+                    n.r = 255; 
+                    n.g = 255; 
+                    n.b = 0;
+                }  
+            }
             Network.get(i).add(n);
             if(i == 0){
                 Input in = new Input(n); 
@@ -40,19 +51,18 @@ void setup(){
             for(int k = 0; k<NextLayer.size(); k++){
                 Node nextNode = NextLayer.get(k);
                 n.addConnection(n ,nextNode);
-                System.out.println(n.Connections.get(0));
             }
         }
     }
 }
 
 void draw(){
-    background(5, 5, 5);
+    background(15, 15, 15);
 
     if(isRunning){
 
         for(int i = 0; i<Inputs.size(); i++){
-            Inputs.get(i).update(); 
+            //Inputs.get(i).update(); 
         }
 
         for(int i = 0; i<Network.size(); i++){
@@ -67,6 +77,6 @@ void draw(){
             }
         }
     }else{
-        System.out.println("Annimation not running");
+        text("Click on the program, then type to add to the String", 50, 50);
     }
 }
