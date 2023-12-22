@@ -24,7 +24,7 @@ class Button{
     }
 
     void update(){
-        System.out.println(String.format("%s", hoover));
+        //System.out.println(String.format("%s", hoover));
         onHover(mouseX, mouseY);
         stroke(255, 255, 0); 
         if(!hoover){

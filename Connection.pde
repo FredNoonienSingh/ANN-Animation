@@ -3,16 +3,17 @@ class Connection{
     Node child; 
     float strength; 
 
-    Connection(Node p, Node c){
+    Connection(Node p, Node c, float s){
         parent = p; 
         child = c; 
-        strength = 0.25;//random(0, 1);
+        strength = s;
     }
 
     void update(){
-        float strokeW = map(strength, -0.5, 0.5, 0,1); 
-        float alphaValue = map(strength, -0.5,0.5, 155, 255);
-        if(strength < .25){
+        float strokeW = map(strength, -1, 1, 0,1); 
+        float alphaValue = map(strength, -1,1, 155, 255);
+        //System.out.println(String.format("%s", strength)); 
+        if(strength < 0){
             stroke(255, 255, 255, alphaValue);
         }else{
             stroke(0, 255, 255, alphaValue); 

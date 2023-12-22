@@ -3,7 +3,7 @@ class Node{
     float r, g, b; 
     float maxNodeWeight = 1;
     float minNodeWeight = 0;
-    int radius = 12;
+    int radius = 20;
     boolean hoover = false; 
     ArrayList<Connection> Connections = new ArrayList<>(); 
 
@@ -12,13 +12,13 @@ class Node{
         posy = y; 
         weight = minNodeWeight;
         learning_rate = lr; 
-        r = 0; 
+        r = 255; 
         g = 255; 
-        b = 0; 
+        b = 255; 
     }
 
-    void addConnection(Node parent, Node child){
-        Connection con = new Connection(parent, child);
+    void addConnection(Node parent, Node child, float s){
+        Connection con = new Connection(parent, child, s);
         Connections.add(con);
     }
 
@@ -34,15 +34,16 @@ class Node{
 
     void backProbColor(){
         int nodeCount = 0; 
-        float rValue = 255; 
-        float gValue = 255; 
-        float bValue = 255; 
+        float rValue = 0; 
+        float gValue = 0; 
+        float bValue = 0; 
         for(int i = 0; i<Connections.size(); i++){
             Connection con = Connections.get(i); 
             Node prevNode = con.child;
-            rValue = rValue + (prevNode.r*con.strength*2); 
-            gValue = gValue + (prevNode.g*con.strength*2); 
-            bValue = bValue + (prevNode.b*con.strength*2); 
+            float strength = map(con.strength, -1, 1, 0, 1); 
+            rValue = rValue + (prevNode.r*strength); 
+            gValue = gValue + (prevNode.g*strength); 
+            bValue = bValue + (prevNode.b*strength); 
             nodeCount ++; 
         }
         r = map(rValue, 0, 255*nodeCount, 0, 255); 
@@ -59,15 +60,14 @@ class Node{
         if(Connections.size()!=0){
             backProbColor();
         } 
-        float alphaValue = map(weight, minNodeWeight,maxNodeWeight, 200, 255);
         if(!hoover){
             noStroke();
-            radius = 12; 
+            radius = 20; 
         }else{
-            radius = 17; 
+            radius = 30; 
             stroke(255,0,255); 
         }
-        fill(r, g, b, alphaValue);
+        fill(r, g, b);
         circle(posx, posy, radius);
     }
 }
