@@ -4,7 +4,9 @@ Animation of an Artifical Neuronal Network
 
 final int WIDTH = 1080; 
 final int HEIGHT = 768;
-float LEARNING_RATE = 0.01; 
+final float LEARNING_RATE = 0.01; 
+long shlong; 
+
 boolean isRunning = true;
 boolean renderLable = true;
 Mode mode = Mode.NETWORK; // Other Value == "Data"
@@ -12,6 +14,7 @@ Mode mode = Mode.NETWORK; // Other Value == "Data"
 Integer[] LayerSizes = {2,4,8,4,2};
 ArrayList<ArrayList> Network = new ArrayList<>(); 
 ArrayList<Input> Inputs = new ArrayList<>(); 
+ArrayList<DataPoint> Data = new ArrayList<>(); 
 Button startButton = new Button("Click to start annimation", WIDTH / 2, HEIGHT / 2, 150, 80); 
 
 void toogleRunning() {
@@ -21,6 +24,13 @@ void toogleRunning() {
 void setup() {
     size(1080, 768);
     frameRate(60);
+
+        for(int i = 0; i<50000; i++){
+            float xValue = random(0.0, WIDTH); 
+            float yValue = random(0.0, HEIGHT); 
+            DataPoint dp = new DataPoint(xValue, yValue); 
+            Data.add(dp); 
+        }
 
         for (int i = 0; i < LayerSizes.length; i++) {
             ArrayList<Node> Layer = new ArrayList<>();
@@ -65,13 +75,31 @@ void setup() {
         }
 }
 
+void learn(){
+
+    /*
+    i really need to come up with an idea for this soon
+    */ 
+
+}
+
+String predict(DataPoint dp){
+    Classification classification = Util.getClass(dp.x, dp.y); 
+    boolean truthValue = classification == Classification.RED; 
+    return String.format("Datapoint %s got classified as %s\n    >> which is %s",dp,classification,truthValue);
+}
+
+
 void draw() {
     background(15, 15, 15);
     switch (mode) {
 
     case DATA:
-        String t = "DATA"; 
-        text(t, 50, 50); 
+        for(int i = 0; i<Data.size(); i++){
+            DataPoint dp = Data.get(i);
+            //System.out.println(predict(dp)); 
+            dp.draw(); 
+        }
         break;
 
     case NETWORK: 
