@@ -25,18 +25,25 @@ class Button{
 
     void update(){
         //System.out.println(String.format("%s", hoover));
+
         onHover(mouseX, mouseY);
-        stroke(255, 255, 0); 
+        textSize(32);
+        textAlign(CENTER, CENTER);
+        stroke(55, 255, 0); 
         if(!hoover){
             fill(10, 10, 10, 155);
             rect(posx, posy, width, height); 
         }else{
-            fill(255, 255, 0, 155); 
+
+            fill(55, 255, 0, 155); 
             rect(posx, posy, width, height);
         }
         stroke(255, 255, 255);
         fill(255, 255, 255, 255);  
-        text(label, posx+width/10, posy+height/2); 
-        noFill(); 
+        text(label, posx, posy, width, height);
+        noFill();
+        textSize(17);
+        textAlign(LEFT, CENTER);
     }
+   
 }

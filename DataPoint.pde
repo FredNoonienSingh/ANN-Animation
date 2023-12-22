@@ -10,19 +10,18 @@ class DataPoint{
     }
 
     void draw(){
-        strokeWeight(1); 
+        strokeWeight(2);
         switch (classification){
-            case BLUE: 
+            case BLUE:
                 stroke(0, 0, 255); 
-                break; 
-            case RED: 
+                break;
+            case RED:
                 stroke(255, 0, 0); 
                 break;
-            case GREEN: 
+            case GREEN:
                 stroke(0, 255, 0); 
-                break;  
+                break;
         }
         point(x, y);
     }
-    
 }

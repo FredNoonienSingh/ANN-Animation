@@ -1,17 +1,13 @@
 class Node{
-    float posx, posy,weight, learning_rate;
-    float r, g, b; 
-    float maxNodeWeight = 1;
-    float minNodeWeight = 0;
-    int radius = 20;
+    float posx, posy,weight, r, g, b, radius;
+    String id; 
     boolean hoover = false; 
     ArrayList<Connection> Connections = new ArrayList<>(); 
 
-    Node(float x,float y, float lr){
+    Node(float x,float y, int layer, int height){
         posx = x; 
         posy = y; 
-        weight = minNodeWeight;
-        learning_rate = lr; 
+        id = String.format("ID: %s-%s", layer, height); 
         r = 255; 
         g = 255; 
         b = 255; 
@@ -40,19 +36,15 @@ class Node{
         for(int i = 0; i<Connections.size(); i++){
             Connection con = Connections.get(i); 
             Node prevNode = con.child;
-            float strength = map(con.strength, -1, 1, 0, 1); 
-            rValue = rValue + (prevNode.r*strength); 
-            gValue = gValue + (prevNode.g*strength); 
-            bValue = bValue + (prevNode.b*strength); 
+            float strength = con.strength; 
+            rValue = rValue + (prevNode.r*Util.sigmoid(strength)); 
+            gValue = gValue + (prevNode.g*Util.sigmoid(strength)); 
+            bValue = bValue + (prevNode.b*Util.sigmoid(strength)); 
             nodeCount ++; 
         }
         r = map(rValue, 0, 255*nodeCount, 0, 255); 
         g = map(gValue, 0, 255*nodeCount, 0, 255);
         b = map(bValue, 0, 255*nodeCount, 0, 255);
-    }
-
-    void onClick(){
-        // Call funktion
     }
 
     void update(){
@@ -65,7 +57,8 @@ class Node{
             radius = 20; 
         }else{
             radius = 30; 
-            stroke(255,0,255); 
+            stroke(255,0,255);
+
         }
         fill(r, g, b);
         circle(posx, posy, radius);

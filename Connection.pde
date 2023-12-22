@@ -10,7 +10,7 @@ class Connection{
     }
 
     void update(){
-        float strokeW = map(strength, -1, 1, 0,1); 
+        float strokeW = map(strength, -5, 5, .5,1); 
         float alphaValue = map(strength, -1,1, 155, 255);
         //System.out.println(String.format("%s", strength)); 
         if(strength < 0){

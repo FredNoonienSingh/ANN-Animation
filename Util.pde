@@ -20,9 +20,6 @@ static class Util{
         float center_x = 540; 
         float center_y = 384;
         if(eucliedianDistance(x,y,center_x,center_y)<radius){
-            if(eucliedianDistance(x,y,center_x,center_y)<radius-100){
-                return Classification.GREEN;
-            }
             return Classification.BLUE;
         }
         return Classification.RED; 

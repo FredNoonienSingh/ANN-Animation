@@ -1,4 +1,9 @@
+/*
+    Currently not in use -> looked Stupid ! 
+*/
+
 class Input{
+
     float posy;
     int secCount;  
     Node targetNode; 
