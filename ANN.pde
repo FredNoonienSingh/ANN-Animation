@@ -6,31 +6,37 @@ final int WIDTH = 1080;
 final int HEIGHT = 768;
 final float LEARNING_RATE = 0.02; 
 
-boolean isRunning = true;
-boolean renderLable = true;
+int epoch = 0; 
 int iterattion = 0; 
-Mode mode = Mode.NETWORK; // Other Value == "Data"
+boolean isLearning = false; 
+
+Mode mode = Mode.NETWORK; 
 String modeStr = modeStr = "Switch View";
 
 Integer[] LayerSizes = {2, 4, 8, 4, 2};
-ArrayList<ArrayList> Network = new ArrayList<>(); 
 ArrayList<DataPoint> Data = new ArrayList<>(); 
+ArrayList<ArrayList> Network = new ArrayList<>(); 
 Button switchButton = new Button(modeStr, WIDTH-80, HEIGHT-50, 150, 80); 
-Button learnButton = new Button("train", WIDTH-(WIDTH-80), HEIGHT-50, 150, 80); 
+Button learnButton = new Button("train", WIDTH-(WIDTH-80), HEIGHT-50, 150, 80);
+Button resetButton = new Button("Reset", WIDTH-80, HEIGHT-(HEIGHT-50), 150, 80); 
 
 
 void mousePressed() {
-    if (switchButton.hoover) {
+    if(switchButton.hoover) {
         switchMode(); 
     }
-    if (learnButton.hoover) {
-        learn(); 
+    if (learnButton.hoover){
+       toogleLearning(); 
+    }
+    if (resetButton.hoover){
+       epoch = 0;
+       iterattion = 0; 
+       isLearning = false; 
     }
 }
 
-
-void toogleRunning() {
-    isRunning = !isRunning; 
+void toogleLearning(){
+    isLearning = !isLearning; 
 }
 
 void switchMode() {
@@ -44,9 +50,9 @@ void switchMode() {
 
 void setup() {
     size(1080, 768);
-    frameRate(144);
+    frameRate(60);
 
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 0; i < 100; i++) {
         float xValue = random(0.0, WIDTH); 
         float yValue = random(0.0, HEIGHT); 
         DataPoint dp = new DataPoint(xValue, yValue); 
@@ -123,6 +129,8 @@ void draw() {
             }
             if (iterattion < Data.size()) {
                 iterattion ++; 
+            }else{
+                resetButton.update(); 
             }
             
             text(l, 50,50);
@@ -141,6 +149,15 @@ void draw() {
                 }   
             }
             learnButton.update();
+            if(isLearning){
+                String trainingLable = String.format("Trained for: %s epochs", epoch); 
+                text(trainingLable, 50, 50);
+                if(epoch < Data.size()){
+                    epoch ++; 
+                } else{
+                    resetButton.update(); 
+                }
+            }
             break;
         
         case SVM:

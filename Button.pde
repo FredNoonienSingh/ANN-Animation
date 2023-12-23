@@ -34,7 +34,6 @@ class Button{
             fill(10, 10, 10, 155);
             rect(posx, posy, width, height); 
         }else{
-
             fill(55, 255, 0, 155); 
             rect(posx, posy, width, height);
         }

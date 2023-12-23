@@ -24,5 +24,4 @@ static class Util{
         }
         return Classification.RED; 
     }
-
 }
