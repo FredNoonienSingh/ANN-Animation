@@ -2,26 +2,25 @@
 static class Util{
 
     static float sigmoid(float x){
-        return (float)(1.0 / (1.0 + Math.exp(-x))); 
+        return (float)(1.0 / (1.0 + Math.exp(-x)));
     }
 
     static float primeSigmoid(float x){
-        return x * (1-x); 
+        return x * (1-x);
     }
 
-    static float eucliedianDistance(float x_1, float y_1, 
-                                    float x_2, float y_2 ){
+    static float eucliedianDistance(float x_1, float y_1,
+                                    float x_2, float y_2){
         return sqrt(sq(x_1-x_2) + sq(y_1 - y_2));
     }
 
     static Classification getClass (float x, float y){
-        
-        float radius = 384.0; 
-        float center_x = 540; 
+        float radius = 384.0;
+        float center_x = 540;
         float center_y = 384;
         if(eucliedianDistance(x,y,center_x,center_y)<radius){
             return Classification.BLUE;
         }
-        return Classification.RED; 
+        return Classification.RED;
     }
 }

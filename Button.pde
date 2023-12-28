@@ -25,7 +25,7 @@ class Button{
 
     void update(){
         //System.out.println(String.format("%s", hoover));
-
+        strokeWeight(1); 
         onHover(mouseX, mouseY);
         textSize(32);
         textAlign(CENTER, CENTER);
