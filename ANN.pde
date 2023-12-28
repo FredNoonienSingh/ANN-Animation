@@ -114,7 +114,7 @@ void learn(DataPoint dp){
                 Node parent = con.parent;
                 con.strength += LEARNING_RATE * parent.value * derror;
                 con.strength = Util.sigmoid(con.strength);
-                System.out.println(String.format("CS %s", con.strength));
+                //System.out.println(String.format("CS %s", con.strength));
             }
         }
     }
