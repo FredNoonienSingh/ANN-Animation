@@ -1,5 +1,6 @@
 class Node{
-    float posx, posy,weight, r, g, b, radius;
+
+    float posx, posy, weight, r, g, b, radius;
     float value = 0;
     String id;
     boolean hoover = false;
@@ -8,7 +9,7 @@ class Node{
     Node(float x,float y, int layer, int height){
         posx = x;
         posy = y;
-        id = String.format("ID: %s-%s", layer, height);
+        id = String.format("id:%s%s", layer, height);
         r = 255;
         g = 255;
         b = 255;
@@ -24,6 +25,7 @@ class Node{
         float disY = posy - my;
         if((sqrt(sq(disX) + sq(disY)) < radius)){
             hoover = true;
+            show_id(); 
         }else{
             hoover = false;
         }
@@ -59,12 +61,27 @@ class Node{
         }else{
             radius = 30;
             stroke(255,0,255);
-
         }
         fill(r, g, b);
         circle(posx, posy, radius);
-
-        stroke(255, 255, 255);
-        text(String.format("%s", value), posx+10, posy+10);
     }
+    void show_id(){
+        fill(255, 255, 255);
+        double val = Math.round(value*1000)/1000.00d;
+        text(String.format("%s\n\t %s", id,val), posx+15, posy+10);
+        noFill(); 
+    }
+}
+
+class BiasNode extends Node{
+
+    public BiasNode(float x,float y, int layer, int height){
+        super(x, y, layer, height); 
+    }
+
+    @Override void addConnection(Node parent, Node child, float s){
+        Connection con = new Connection(parent, child, s);
+        Connections.add(con);
+    }
+    
 }

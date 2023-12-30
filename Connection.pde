@@ -14,9 +14,9 @@ class Connection{
         float alphaValue = map(strength, -1,1, 155, 255);
         //System.out.println(String.format("%s", strength)); 
         if(strength < 0){
-            stroke(255, 255, 255, alphaValue);
+            stroke(255, 255, 255);
         }else{
-            stroke(0, 255, 255, alphaValue);
+            stroke(0, 255, 255);
         }
         try {
             if( parent.hoover){

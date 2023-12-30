@@ -15,9 +15,9 @@ static class Util{
     }
 
     static Classification getClass (float x, float y){
-        float radius = 384.0;
-        float center_x = 540;
-        float center_y = 384;
+        float radius = HEIGHT/2;
+        float center_x = WIDTH/2;
+        float center_y = HEIGHT/2;
         if(eucliedianDistance(x,y,center_x,center_y)<radius){
             return Classification.BLUE;
         }

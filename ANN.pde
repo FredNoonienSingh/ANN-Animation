@@ -2,25 +2,26 @@
 Animation of an Artifical Neuronal Network
 */
 
-final int WIDTH = 1080;
-final int HEIGHT = 768;
+static int WIDTH = 1920;
+static int HEIGHT = 1000;
 final float LEARNING_RATE = 0.2;
 
 int epoch = 0;
 int iteration = 0;
-int DataPointCount = 10000;
+int DataPointCount = 100000;
 boolean isLearning = false;
+boolean renderLable = false; 
 
 Mode mode = Mode.NETWORK;
 String modeStr = "Switch View";
 
-Integer[] LayerSizes = {2,4,8,16,8,4,2};
+Integer[] LayerSizes = {2,4,8,8,4,2};
 ArrayList<DataPoint> Data = new ArrayList<>();
 ArrayList<ArrayList> Network = new ArrayList<>();
 Button switchButton = new Button(modeStr, WIDTH-80, HEIGHT-50, 150, 80);
 Button learnButton = new Button("train", WIDTH-(WIDTH-80), HEIGHT-50, 150, 80);
 Button resetButton = new Button("Reset", WIDTH-80, HEIGHT-(HEIGHT-50), 150, 80);
-
+Button lableButton = new Button("Lable", WIDTH-80, HEIGHT-(HEIGHT-150), 150, 80);
 
 void mousePressed(){
     if(switchButton.hoover){
@@ -33,6 +34,9 @@ void mousePressed(){
        epoch = 0;
        iteration = 0;
        isLearning = false;
+    }
+    if(lableButton.hoover){
+        renderLable = !renderLable; 
     }
 }
 
@@ -49,7 +53,7 @@ void switchMode(){
 }
 
 void setup(){
-    size(1080, 768);
+    size(1920, 1000);
     frameRate(60);
 
     for (int i = 0; i < DataPointCount; i++){
@@ -162,7 +166,7 @@ void draw(){
                 dp.draw();
             }
             if (iteration < Data.size()){
-                iteration ++;
+                iteration += 10;
             }else{
                 resetButton.update();
             }
@@ -184,6 +188,18 @@ void draw(){
                     no.update();
                 }
             }
+
+            // moved in to seperate loop so it renders after the whole Network
+            if(renderLable){
+                for (int i = 0; i < Network.size(); i++){
+                    for (int j = 0; j < LayerSizes[i]; j++){
+                            ArrayList<Node> Layer = Network.get(i);
+                            Node no = Layer.get(j);
+                            no.show_id(); 
+                    }
+                }
+            }
+            lableButton.update(); 
             learnButton.update();
             if(isLearning){
                 if(epoch < Data.size()){
