@@ -12,18 +12,23 @@ int dataPointCount = 10000;
 boolean isLearning = false;
 boolean renderLable = false; 
 
+float errorTerm = 0; 
+
 Mode mode = Mode.NETWORK;
 String modeStr = "Switch View";
+String trainLable = "train"; 
+String resetLable = "reset"; 
+String lableLable = "Lable"; 
 
 Integer[] LayerSizes = {2,4,8,4,2};
 ArrayList<DataPoint> Data = new ArrayList<>();
 ArrayList<ArrayList> Network = new ArrayList<>();
 Button switchButton = new Button(modeStr, WIDTH-80, HEIGHT-50, 150, 80);
-Button learnButton = new Button("train", WIDTH-(WIDTH-80), HEIGHT-50, 150, 80);
-Button resetButton = new Button("Reset", WIDTH-80, HEIGHT-(HEIGHT-50), 150, 80);
-Button lableButton = new Button("Lable", WIDTH-80, HEIGHT-(HEIGHT-150), 150, 80);
+Button learnButton = new Button(trainingLable, WIDTH-(WIDTH-80), HEIGHT-50, 150, 80);
+Button resetButton = new Button(resetLable, WIDTH-80, HEIGHT-(HEIGHT-50), 150, 80);
+Button lableButton = new Button(lableLable, WIDTH-80, HEIGHT-(HEIGHT-150), 150, 80);
 
-float errorTerm = 0; 
+
 
 void mousePressed(){
     if(switchButton.hoover){
@@ -77,8 +82,6 @@ void setup(){
             float layerHeight = HEIGHT / (LayerSizes[i] + 1);
             Node n = new Node(nodeX, layerHeight * (j + 1), i, j);
             
-            // This should get a refactor 
-            
             if (i == Network.size() - 1) {
                 if (j % 2 == 0){
                     n.rgb = new float[] {0, 0, 255}; 
@@ -129,8 +132,7 @@ void learn(DataPoint dp){
                 con.strength = Util.sigmoid(temp);
                 con.bias = LEARNING_RATE * parent.value * derror; 
                 System.out.println(String.format(
-                    "Node-%s:\n\ttemp: %s\n\tWeight: %s
-                    \n\tBias: %s\n\n\tDERROR: %s\n\n\n",
+                    "Node-%s:\n\ttemp: %s\n\tWeight: %s\n\tBias: %s\n\n\tDERROR: %s\n\n\n",
                     parent.id,temp,con.strength, con.bias, derror)
                 );
             }
@@ -188,7 +190,7 @@ void draw(){
             }
             text(l, 50,50);
             break;
- 
+
         case NETWORK:
             String trainingLable = String.format(
                 "Trained for: %s epochs\n\tMSE: %s"
@@ -229,12 +231,12 @@ void draw(){
                 }
             }
             break;
-        
+
         case SVM:
             String s = "SVM";
             text(s, 50, 50);
             break;
-        
+
         case SIGMOID:
             String si = "SIGMOID";
             text(si, 50, 50);
