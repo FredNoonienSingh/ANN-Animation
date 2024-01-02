@@ -2,19 +2,23 @@ class Connection{
     Node parent;
     Node child;
     float strength;
+    float bias; 
 
-    Connection(Node p, Node c, float s){
+    public Connection(Node p, Node c, float s){
         parent = p;
         child = c;
         strength = s;
+        bias = random(-0.5, 0.5); 
     }
 
     void update(){
-        float strokeW = map(strength, -0, 1, .5,1);
-        float alphaValue = map(strength, -1,1, 155, 255);
+        float strokeW = map(strength, 0, 1, .5,1);
+        float alphaValue = map(strength, 0,1, 155, 255);
+        bias = random(-0.5, 0.5); 
         //System.out.println(String.format("%s", strength)); 
-        if(strength < 0){
-            stroke(255, 255, 255);
+        if(strength < 0.5){
+            stroke(155, 155, 155);
+
         }else{
             stroke(0, 255, 255);
         }

@@ -2,6 +2,7 @@
 static class Util{
 
     static float sigmoid(float x){
+        // Activation function between 0 and 1
         return (float)(1.0 / (1.0 + Math.exp(-x)));
     }
 
