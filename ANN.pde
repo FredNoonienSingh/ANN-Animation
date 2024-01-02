@@ -2,8 +2,8 @@
 Animation of an Artifical Neuronal Network
 */
 
-static int WIDTH = 1920;
-static int HEIGHT = 1000;
+static int WIDTH = 1080;
+static int HEIGHT = 720;
 final float LEARNING_RATE = 0.2;
 
 int epoch = 0;
@@ -24,10 +24,9 @@ Integer[] LayerSizes = {2,4,8,4,2};
 ArrayList<DataPoint> Data = new ArrayList<>();
 ArrayList<ArrayList> Network = new ArrayList<>();
 Button switchButton = new Button(modeStr, WIDTH-80, HEIGHT-50, 150, 80);
-Button learnButton = new Button(trainingLable, WIDTH-(WIDTH-80), HEIGHT-50, 150, 80);
+Button learnButton = new Button(trainLable, WIDTH-(WIDTH-80), HEIGHT-50, 150, 80);
 Button resetButton = new Button(resetLable, WIDTH-80, HEIGHT-(HEIGHT-50), 150, 80);
 Button lableButton = new Button(lableLable, WIDTH-80, HEIGHT-(HEIGHT-150), 150, 80);
-
 
 
 void mousePressed(){
@@ -60,7 +59,7 @@ void switchMode(){
 }
 
 void setup(){
-    size(1920, 1000);
+    size(1080, 720);
     frameRate(20);
 
     for (int i = 0; i < dataPointCount; i++){

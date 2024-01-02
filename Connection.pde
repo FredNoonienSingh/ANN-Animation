@@ -1,4 +1,5 @@
 class Connection{
+
     Node parent;
     Node child;
     float strength;
