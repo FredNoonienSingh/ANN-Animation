@@ -75,12 +75,19 @@ class Node{
 class BiasNode extends Node{
 
     public BiasNode(float x,float y, int layer, int height){
-        super(x, y, layer, height); 
+        super(x, y, layer, height);
+        float bias = 1;
+        float radius = 10; 
     }
 
     @Override void addConnection(Node parent, Node child, float s){
         Connection con = new Connection(parent, child, s);
         Connections.add(con);
     }
-    
+
+    @Override void update(){
+        stroke(255,255,255); 
+        fill(100,100,100);
+        circle(posx, posy, radius);
+    }
 }
