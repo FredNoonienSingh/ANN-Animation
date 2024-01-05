@@ -1,22 +1,26 @@
 class Connection{
+
     Node parent;
     Node child;
     float strength;
+    float bias; 
 
-    Connection(Node p, Node c, float s){
+    public Connection(Node p, Node c, float s){
         parent = p;
         child = c;
         strength = s;
+        bias = random(-5, 5); 
     }
 
     void update(){
-        float strokeW = map(strength, -0, 1, .5,1);
-        float alphaValue = map(strength, -1,1, 155, 255);
+        float strokeW = map(strength, 0, 1, .5,1);
+        float alphaValue = map(strength, 0,1, 155, 255);
         //System.out.println(String.format("%s", strength)); 
-        if(strength < 0){
-            stroke(255, 255, 255, alphaValue);
+        if(strength < 0.5){
+            stroke(155, 155, 155);
+
         }else{
-            stroke(0, 255, 255, alphaValue);
+            stroke(0, 255, 255);
         }
         try {
             if( parent.hoover){
