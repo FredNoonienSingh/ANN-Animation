@@ -7,11 +7,11 @@ class Layer{
     public Layer(int ls, int ln, float lx){
         layerSize = ls; 
         layerNumber = ln; 
-       for(int i = 0; i<layerSize; i++){
-            float nodeHeight = (HEIGHT / (layerSize+ 1))*i;
-            Node node = new Node(lx,nodeHeight, layerNumber, i); 
+        for(int i = 0; i<layerSize; i++){
+            float nodeHeight = HEIGHT/(layerSize+1)*(i+1);
+            Node node = new Node(lx, nodeHeight, layerNumber, i); 
             nodes.add(node); 
-       } 
+        }
     }
 
     void update(){
@@ -22,14 +22,6 @@ class Layer{
 
             node.update();
         }
-    }
-
-}
-
-class OutputLayer extends Layer{
-
-    public OutputLayer(int ls, int ln, float lx){
-        super(ls, ln, lx);
     }
 
 }
