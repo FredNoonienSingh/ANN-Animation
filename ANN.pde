@@ -20,9 +20,10 @@ String trainLable = "train";
 String resetLable = "reset"; 
 String lableLable = "Lable"; 
 
-Integer[] LayerSizes = {2,4,8,4,2};
+Integer[] LayerSizes = {2,4,2};
+Network network = new Network(LayerSizes); 
 ArrayList<DataPoint> Data = new ArrayList<>();
-ArrayList<Layer> Network = new ArrayList<>();
+
 Button switchButton = new Button(modeStr, WIDTH-80, HEIGHT-50, 150, 80);
 Button learnButton = new Button(trainLable, WIDTH-(WIDTH-80), HEIGHT-50, 150, 80);
 Button resetButton = new Button(resetLable, WIDTH-80, HEIGHT-(HEIGHT-50), 150, 80);
@@ -69,12 +70,8 @@ void setup(){
         Data.add(dp);
     }
 
-    for(int i = 0; i<LayerSizes.length; i++){
-        float layerX = (WIDTH/LayerSizes.length +i); 
-        Layer l = new Layer(LayerSizes[i], i, layerX);
-        System.out.println(String.format("%s",l)); 
-        Network.add(l); 
-    }
+
+
 
 
 }
@@ -119,10 +116,7 @@ void draw(){
                 ,epoch, MSE()
             );
             text(trainingLable, 50, 50);
-            for (int i = 0; i < Network.size(); i++){
-                Layer layer = Network.get(i); 
-                layer.update(); 
-                }
+            network.update(); 
             // moved in to seperate loop so it renders after the whole Network
             break;
     }
