@@ -9,7 +9,6 @@ class Connection{
         parent = p;
         child = c;
         strength = s;
-        bias = random(-5, 5); 
     }
 
     void update(){

@@ -16,8 +16,9 @@ class Node{
         id = String.format("id:%s%s", layer, height);
     }
 
-    void addConnection(Node parent, Node child, float s){
-        Connection con = new Connection(parent, child, s);
+    void addConnection(Node parent, Node child){
+        float weight = random(0, 1); 
+        Connection con = new Connection(parent, child, weight);
         Connections.add(con);
     }
 
@@ -26,7 +27,7 @@ class Node{
         float disY = posy - my;
         if((sqrt(sq(disX) + sq(disY)) < radius)){
             hoover = true;
-            show_id(); 
+            show_id();
         }else{
             hoover = false;
         }
@@ -52,7 +53,7 @@ class Node{
     void update(){
         onHover(mouseX, mouseY);
         if(Connections.size()!=0){
-            backProbColor();
+            //backProbColor();
         }
         if(!hoover){
             noStroke();
@@ -80,10 +81,6 @@ class BiasNode extends Node{
         float radius = 10; 
     }
 
-    @Override void addConnection(Node parent, Node child, float s){
-        Connection con = new Connection(parent, child, s);
-        Connections.add(con);
-    }
 
     @Override void update(){
         stroke(255,255,255); 
