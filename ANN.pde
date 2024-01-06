@@ -20,7 +20,7 @@ String trainLable = "train";
 String resetLable = "reset"; 
 String lableLable = "Lable"; 
 
-Integer[] LayerSizes = {2,4,2};
+Integer[] LayerSizes = {2,4,2,1};
 Network network = new Network(LayerSizes); 
 ArrayList<DataPoint> Data = new ArrayList<>();
 
@@ -69,11 +69,6 @@ void setup(){
         DataPoint dp = new DataPoint(xValue, yValue);
         Data.add(dp);
     }
-
-
-
-
-
 }
 
 float MSE(){

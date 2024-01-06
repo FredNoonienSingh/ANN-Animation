@@ -1,4 +1,3 @@
-
 class Layer{
     int layerSize, layerNumber; 
     float layerX; 
@@ -14,12 +13,25 @@ class Layer{
         }
     }
 
+    int size(){
+        return nodes.size();
+    }
+
+    Node get_node(int i){
+        // returns Node at index i in ArrayList nodes
+        return nodes.get(i);
+    }
+
     void update(){
-        System.out.println(String.format("%s",nodes.size())); 
+        //System.out.println(String.format("%s",nodes.size())); 
         for(int i = 0; i<nodes.size(); i++){
             Node node = nodes.get(i);
-            System.out.println(String.format("%s",node)); 
-
+            ArrayList<Connection> connections = node.Connections; 
+            for(int k = 0; k<connections.size(); k++){
+                Connection con = connections.get(k);
+                System.out.println(String.format("%s", con)); 
+                con.update();
+            }
             node.update();
         }
     }
