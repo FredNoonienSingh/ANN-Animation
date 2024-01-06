@@ -71,18 +71,6 @@ void setup(){
     }
 }
 
-float MSE(){
-    return errorTerm/epoch; 
-} 
-
-void learn(DataPoint dp){
-   predict(dp);
-}
-
-float predict(DataPoint dp){
-    System.out.println("got deleted because of stupid");
-    return 0.0; 
-}
 
 void draw(){
     background(35, 35, 35);
@@ -108,11 +96,10 @@ void draw(){
         case NETWORK:
             String trainingLable = String.format(
                 "Trained for: %s epochs\n\tMSE: %s"
-                ,epoch, MSE()
+                ,epoch, 0.1
             );
             text(trainingLable, 50, 50);
             network.update(); 
-            // moved in to seperate loop so it renders after the whole Network
             break;
     }
     switchButton.update();

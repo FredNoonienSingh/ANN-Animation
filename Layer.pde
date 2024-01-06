@@ -23,13 +23,11 @@ class Layer{
     }
 
     void update(){
-        //System.out.println(String.format("%s",nodes.size())); 
         for(int i = 0; i<nodes.size(); i++){
             Node node = nodes.get(i);
             ArrayList<Connection> connections = node.Connections; 
             for(int k = 0; k<connections.size(); k++){
                 Connection con = connections.get(k);
-                System.out.println(String.format("%s", con)); 
                 con.update();
             }
             node.update();
