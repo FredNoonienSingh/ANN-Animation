@@ -39,7 +39,7 @@ class Node{
         for(int i = 0; i<Connections.size(); i++){
             Connection con = Connections.get(i);
             Node prevNode = con.child;
-            float strength = con.strength;
+            float strength = con.weight;
             for(int j =0; j< cValue.length; j++){
                 cValue[j] = cValue[j] + (prevNode.rgb[j]*strength);
             }

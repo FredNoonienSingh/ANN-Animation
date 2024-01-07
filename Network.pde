@@ -6,7 +6,6 @@ class Network{
         for(int i = 0; i<LayerSizes.length; i++){
             float layerX = (WIDTH/(LayerSizes.length+1))*(i+1); 
             Layer l = new Layer(LayerSizes[i], i, layerX);
-            //System.out.println(String.format("%s",l)); 
             layers.add(l); 
         }
         addConnections(); 
@@ -26,7 +25,14 @@ class Network{
                 }
             }
         }
-        System.out.println("Done");
+    }
+
+    void learn(DataPoint dp){
+        predict(dp);
+    }
+
+    float predict(DataPoint dp){
+        return 0.0; 
     }
 
     void update(){
